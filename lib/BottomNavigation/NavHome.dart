@@ -1,3 +1,5 @@
+import 'package:ccm/Nav/All.dart';
+import 'package:ccm/Nav/Demo.dart';
 import 'package:ccm/Nav/HaveDealers.dart';
 import 'package:flutter/material.dart';
 class Person {
@@ -26,13 +28,13 @@ class _NavHomeState extends State<NavHome> {
   ];
   List<Widget> containers = [
     Container(
-      color: Colors.white,
-    ),
-    Container(
       child: AllType(),
     ),
     Container(
-      color: Colors.white,
+      child: HaveDealers(),
+    ),
+    Container(
+      child: Demo(),
     ),
     Container(
       color: Colors.blue,
@@ -58,33 +60,34 @@ class _NavHomeState extends State<NavHome> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text("Home"),
+          title: Text("CCM SYSTEM"),
+          backgroundColor: Colors.black,
           bottom: TabBar(
             isScrollable: true,
             tabs: <Widget>[
               Tab(
-                text: 'all',
+                text: 'All'.toUpperCase(),
               ),
               Tab(
-                text: "High Price",
+                text: "High Price".toUpperCase(),
               ),
               Tab(
-                text: 'Have Dealers',
+                text: 'Have Dealers'.toUpperCase(),
               ),
               Tab(
-                text: "Design Issue",
+                text: "Design Issue".toUpperCase(),
               ),
               Tab(
-                text: 'Quality Issue',
+                text: 'Quality Issue'.toUpperCase(),
               ),
               Tab(
-                text: "Now Not Required",
+                text: "Now Not Required".toUpperCase(),
               ),
               Tab(
-                text: 'Avaliblity',
+                text: 'Avaliblity'.toUpperCase(),
               ),
               Tab(
-                text: 'Pending',
+                text: 'Pending'.toUpperCase(),
               )
             ],
           ),

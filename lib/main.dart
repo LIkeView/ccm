@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: tabs[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         items: [

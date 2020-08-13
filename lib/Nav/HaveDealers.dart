@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:ccm/Api/api.dart';
 import 'package:ccm/Model/ListClientModel.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_launch/flutter_launch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,12 +19,12 @@ class Person {
   Person(this.name, this.surname, this.age);
 }
 
-class AllType extends StatefulWidget {
+class HaveDealers extends StatefulWidget {
   @override
-  _AllTypeState createState() => _AllTypeState();
+  _HaveDealersState createState() => _HaveDealersState();
 }
 
-class _AllTypeState extends State<AllType> {
+class _HaveDealersState extends State<HaveDealers> {
 
   static List<Person> people = [
     Person('Mike', 'Barron', 1),
@@ -46,8 +48,19 @@ class _AllTypeState extends State<AllType> {
     super.initState();
     this.getJsonDataForList();
   }
-
+  void getHttp() async {
+    try {
+      Dio dio = new Dio();
+      Response response = await dio.post(Uri.encodeFull(url) ,  data: {"type_id" : value });
+      print(response);
+    } catch (e) {
+      print(e);
+    }
+  }
   Future<String> getJsonDataForList() async{
+//    Dio dio = new Dio();
+//    Response response = await dio.post(url, data: {"type_id" : value });
+
     var response = await http.post(
       // Encode the url
         Uri.encodeFull(url), body: {
@@ -66,17 +79,20 @@ class _AllTypeState extends State<AllType> {
     }
     return "Success";
   }
+
+
   @override
   Widget build(BuildContext context){
+
+    TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 20.0);
+    TextStyle linkStyle = TextStyle(color: Colors.blue);
     return SafeArea(
       child: Scaffold(
         body: new ListView.builder(
             itemCount: data == null ? 0 : data.length,
             itemBuilder: (BuildContext context, int index){
-
               return
                   new Container(
-
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5.0),
@@ -90,64 +106,85 @@ class _AllTypeState extends State<AllType> {
                           children: <Widget>[
                             Padding(
                                 padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
-                                child: Text(
-                                    data[index]["firm_name"], style: new TextStyle(
-                                    fontSize: 20.0, color: Colors.black)
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.person),
+                                    Text(
+                                        data[index]["firm_name"], style: new TextStyle(
+                                        fontSize: 20.0, color: Colors.black)
+                                    )                               ],
+                                ),
+
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(Icons.person),
+
+                                  Text(data[index]["personal_name"], maxLines: 2,
+                                      style: new TextStyle(
+                                          fontSize: 20.0, color: Colors.black)),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.call),
+                                    RichText(
+                                      text: TextSpan(
+                                      style: defaultStyle,
+                                      children: <TextSpan>[
+//                                      TextSpan(text: 'By clicking Sign Up, you agree to our '),
+                                      TextSpan(
+                                          text: "  "+data[index]["mobile_no"],
+                                      style: new TextStyle(
+                                        fontSize: 18.0, color: Colors.black,
+                                      ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {launch("tel://"+data[index]["mobile_no"]);}
+                                            ),
+                                    ],
+                                  ),
                                 )
+                                  ],
+                                ),
+
                             ),
 
                             Padding(
                               padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                              child: Text(data[index]["personal_name"], maxLines: 2,
-                                  style: new TextStyle(
-                                      fontSize: 20.0, color: Colors.black)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: FlatButton(
-                                child: Row(
+                              child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.call),
-                                  Text( "  "+data[index]["mobile_no"],
-                                  style: new TextStyle(
-                                    fontSize: 18.0, color: Colors.black,
-                                  ), maxLines: 2,),                                ],
-                                ),
-                                  onPressed: () =>launch("tel://"+data[index]["mobile_no"])
-                              )
+                                  FaIcon(FontAwesomeIcons.whatsapp),
+                                  RichText(
+                                    text: TextSpan(
+                                      style: defaultStyle,
+                                      children: <TextSpan>[
+//                                      TextSpan(text: 'By clicking Sign Up, you agree to our '),
+                                        TextSpan(
+                                          text: "  "+data[index]["wp_no"],
+                                          style: new TextStyle(
+                                            fontSize: 18.0, color: Colors.black,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              await FlutterLaunch.launchWathsApp(phone: data[index]["wp_no"], message: "Hello");},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                ],
+                              ),
                             ),
 
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                                  child: FlatButton(
-                                    child: Row(
-                                      children: <Widget>[
-                                        FaIcon(FontAwesomeIcons.whatsapp),
-                                        Text( "  " + data[index]["wp_no"],
-                                        style: new TextStyle(
-                                        fontSize: 18.0, color: Colors.black,
-                                      ), maxLines: 2,),                               ],
-                                    ),
-                                    onPressed: () async {
-                                    await FlutterLaunch.launchWathsApp(phone: data[index]["wp_no"], message: "Hello");
-                                },
-                                )
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Text(data[index]["req_size"],
-                                style: new TextStyle(
-                                  fontSize: 18.0, color: Colors.black,
-                                ), maxLines: 2,),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Text(data[index]["website"],
-                                style: new TextStyle(
-                                  fontSize: 18.0, color: Colors.black,
-                                ), maxLines: 2,),
-                            ),
-                            Row(children: <Widget>[
+
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
                               Container(
                                 padding: EdgeInsets.all(1),
                                 alignment: Alignment.center,

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:ccm/Api/api.dart';
 import 'package:ccm/Login/loginPage.dart';
 import 'package:ccm/Model/AddCoustomer.dart';
+import 'package:ccm/Widgets/DropDownWidgets.dart';
 import 'package:ccm/Widgets/TextFieldWidgets.dart';
 import 'package:ccm/main.dart';
 import 'package:dropdownfield/dropdownfield.dart';
@@ -27,6 +28,240 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
   String res_code,res_msg;
   AddCoustomer _apiResponse;
   File _image;
+
+
+
+
+
+
+
+
+
+
+  final TextEditingController Firm_Name = TextEditingController();
+  final TextEditingController Person_Name = TextEditingController();
+  final TextEditingController AddressLine1 = TextEditingController();
+  final TextEditingController AddressLine2 = TextEditingController();
+  final TextEditingController City = TextEditingController();
+  final TextEditingController State = TextEditingController();
+  final TextEditingController Country = TextEditingController();
+  final TextEditingController Email = TextEditingController();
+  final TextEditingController Mobile = TextEditingController();
+  final TextEditingController Whatsapp = TextEditingController();
+  final TextEditingController Web = TextEditingController();
+  final TextEditingController Size = TextEditingController();
+  final TextEditingController Unit = TextEditingController();
+  final TextEditingController Communication = TextEditingController();
+
+
+
+  String _firm_name = "" , _person_name = "" , _address1="" ,_address2="" , _city="" , _State="" , _country="",
+      _email="",_mobile="",_whatsapp="" ,_web="" , _size="" , _unit="" , _communication="";
+
+  Widget _buildFirmNameField(){
+    return
+      TextFormField(
+        controller: Firm_Name,
+        decoration: InputDecoration(
+            icon: new FaIcon(FontAwesomeIcons.building),
+            labelText: "Firm Name"),
+//        validator: (String value){
+//          if(value.isEmpty){
+//            return 'FirmName is Required';
+//          }
+//        },
+//        onSaved: (String value){
+//          _firm_name = value;
+//        },
+      );
+  }
+
+  Widget _buildPersonNameField(){
+    return TextFormField(
+      controller: Firm_Name,
+      decoration: InputDecoration(
+          icon: new Icon(Icons.person),
+          labelText: "Person Name"),
+
+    );
+  }
+
+  Widget _buildAddress1Field(){
+    return TextFormField(
+      controller: AddressLine1,
+      decoration: InputDecoration(
+          icon: FaIcon(FontAwesomeIcons.addressCard),
+          labelText: "Address Line 1"),
+      validator: (String value){
+        if(value.isEmpty){
+          return 'Address is Required';
+        }
+      },
+      onSaved: (String value){
+        _address1 = value;
+      },
+    );
+  }
+
+  Widget _buildAddress2Field(){
+    return TextFormField(
+      controller: AddressLine2,
+      decoration: InputDecoration(
+          icon: FaIcon(FontAwesomeIcons.addressCard),
+          labelText: "Address Line 2"),
+      onSaved: (String value){
+        _address2 = value;
+      },
+    );
+  }
+
+
+
+  Widget _countryField(){
+    return Container(
+      width: 80,
+      child: TextFormField(
+        decoration: InputDecoration(labelText: "Country"),
+        onSaved: (String value){
+          _country = value;
+        },
+      ),
+    );
+  }
+
+
+  Widget _StateField(){
+    return Container(
+      width: 80,
+      child: TextFormField(
+        controller: State,
+        decoration: InputDecoration(labelText: "State"),
+        onSaved: (String value){
+          _State = value;
+        },
+      ),
+
+    );
+  }
+
+  Widget _cityField(){
+    return Container(
+      width: 120,
+      child: TextFormField(
+        controller: City,
+        decoration: InputDecoration(
+            icon: FaIcon(FontAwesomeIcons.city),
+            labelText: "City"),
+        onSaved: (String value){
+          _city = value;
+        },
+      ),
+
+    );
+
+  }
+
+  Widget _buildEmailField(){
+    return TextFormField(
+      controller: Email,
+      decoration: InputDecoration(
+          icon: FaIcon(FontAwesomeIcons.envelope),
+          labelText: "Email"),
+
+      onSaved: (String value){
+        _email = value;
+      },
+    );
+  }
+  Widget _buildMobileField(){
+    return TextFormField(
+      controller: Mobile,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+          icon: new Icon(Icons.call),
+          labelText: "Mobile No"),
+      onSaved: (String value){
+        _mobile = value;
+      },
+    );
+  }
+  Widget _buildWhatsappNumberField(){
+    return TextFormField(
+      controller: Whatsapp,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+          icon: FaIcon(FontAwesomeIcons.whatsapp),
+          labelText: "Whats app no"),
+
+      onSaved: (String value){
+        _whatsapp = value;
+      },
+    );
+  }
+  Widget _buildWebsiteField(){
+    return TextFormField(
+      controller: Web,
+      decoration: InputDecoration(
+          icon: FaIcon(FontAwesomeIcons.globe),
+          labelText: "Web url"),
+
+      onSaved: (String value){
+        _web = value;
+      },
+    );
+  }
+
+  Widget _SizeField(){
+    return Container(
+      width: 120,
+      child: TextFormField(
+        controller: Size,
+        decoration: InputDecoration(
+            labelText: "Size"),
+        onSaved: (String value){
+          _size = value;
+        },
+      ),
+    );
+
+  }
+
+  Widget _UnitField(){
+    return Container(
+      width: 120,
+      child: TextFormField(
+        controller: Unit,
+        decoration: InputDecoration(
+            labelText: "Unit"),
+        onSaved: (String value){
+          _unit = value;
+        },
+      ),
+    );
+  }
+
+  Widget _CommunicationField(){
+    return Container(
+      child: TextFormField(
+        controller: Communication,
+        decoration: InputDecoration(
+//          icon: new FaIcon(FontAwesomeIcons.building),
+            labelText: "communication"),
+        validator: (String value){
+          if(value.isEmpty){
+            return 'FirmName is Required';
+          }
+        },
+        onSaved: (String value){
+          _communication = value;
+        },
+      ),
+
+    );
+  }
+
+
+
 
 
   Future getImage(ImgSource source) async {
@@ -54,25 +289,25 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
     return InkWell(
       onTap: ()
       async {
-        final String FirmName = TextFieldWidget().Firm_Name.text;
+        final String FirmName = Firm_Name.text;
         final String typeID = "1";
-        final String PersonName = TextFieldWidget().Firm_Name.text;
-        final String Address = TextFieldWidget().Firm_Name.text;
-        final String City = TextFieldWidget().Firm_Name.text;
-        final String StateOfCity = TextFieldWidget().Firm_Name.text;
-        final String Country = TextFieldWidget().Firm_Name.text;
-        final String Email = TextFieldWidget().Firm_Name.text;
-        final String Website = TextFieldWidget().Firm_Name.text;
-        final String MobileNo = TextFieldWidget().Firm_Name.text;
-        final String WpNo = TextFieldWidget().Firm_Name.text;
-        final String ReqSize = TextFieldWidget().Firm_Name.text;
-        final String Qty = TextFieldWidget().Firm_Name.text;
-        final String PaymentType = TextFieldWidget().Firm_Name.text;
-        final String CreaditDate = TextFieldWidget().Firm_Name.text;
-        final String DealingWith = TextFieldWidget().Firm_Name.text;
-        final String DealingFirm = TextFieldWidget().Firm_Name.text;
-        final String DealingSince = TextFieldWidget().Firm_Name.text;
-        final String Communication = TextFieldWidget().Firm_Name.text;
+        final String PersonName = Firm_Name.text;
+        final String Address = Firm_Name.text;
+        final String City = Firm_Name.text;
+        final String StateOfCity = Firm_Name.text;
+        final String Country = Firm_Name.text;
+        final String Email = Firm_Name.text;
+        final String Website = Firm_Name.text;
+        final String MobileNo = Firm_Name.text;
+        final String WpNo = Firm_Name.text;
+        final String ReqSize = Firm_Name.text;
+        final String Qty = Firm_Name.text;
+        final String PaymentType = Firm_Name.text ;
+        final String CreaditDate = Firm_Name.text;
+        final String DealingWith = Firm_Name.text;
+        final String DealingFirm = Firm_Name.text;
+        final String DealingSince = Firm_Name.text;
+        final String Communication = Firm_Name.text;
 
         final AddCoustomer apiResponse = await ApiRepository().InsertData(FirmName , typeID , PersonName , Address , City , StateOfCity , Country , Email , Website,
             MobileNo,WpNo,ReqSize,Qty,PaymentType,CreaditDate,DealingWith,DealingFirm,DealingSince,Communication) ;
@@ -82,20 +317,17 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
         if (apiResponse.resCode == 1) {
 //          Navigator.pop(context);
           print(apiResponse.resMessage);
-            setState(() {
-              MyHomePage().createState().currentIndex ;
-              print(MyHomePage().createState().currentIndex);
-            });
-//          Navigator.push(
-//              context, MaterialPageRoute(builder: (context) => LoginPage()));
           Toast.show(
-              apiResponse.resMessage, context, duration: Toast.LENGTH_SHORT,
-              gravity: Toast.BOTTOM);
+              FirmName+ apiResponse.resMessage, context, duration: Toast.LENGTH_SHORT,
+              gravity: Toast.CENTER);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MyHomePage()));
+
         }
         else {
           Toast.show(
               apiResponse.resMessage, context, duration: Toast.LENGTH_SHORT,
-              gravity: Toast.BOTTOM);
+              gravity: Toast.CENTER);
         }
       },
       child: Container(
@@ -178,18 +410,12 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
 
   }
 
-  static List<Person> people = [
-    Person('Mike', 'Barron', 64),
-    Person('Todd', 'Black', 30),
-    Person('Ahmad', 'Edwards', 55),
-    Person('Anthony', 'Johnson', 67),
-    Person('Annette', 'Brooks', 39),
-  ];
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
         title: Text("Add"),
         actions: <Widget>[
@@ -215,10 +441,10 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Coustomer Datails"),
-                            TextFieldWidget().buildFirmNameField(),
-                            TextFieldWidget().buildPersonNameField(),
-                            TextFieldWidget().buildAddress1Field(),
-                            TextFieldWidget().buildAddress2Field(),
+                            _buildFirmNameField(),
+                            _buildPersonNameField(),
+                            _buildAddress1Field(),
+                            _buildAddress2Field(),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
@@ -251,10 +477,10 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
                                   ]
                               ),
                             ),
-                            TextFieldWidget().buildEmailField(),
-                            TextFieldWidget().buildMobileField(),
-                            TextFieldWidget().buildWhatsappNumberField(),
-                            TextFieldWidget().buildWebsiteField(),
+                            _buildEmailField(),
+                            _buildMobileField(),
+                            _buildWhatsappNumberField(),
+                            _buildWebsiteField(),
                           ],
                         ),
                       ),
@@ -273,25 +499,48 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Requirement Datails"),
+//                            Container(
+//                              padding: EdgeInsets.all(5.0),
+//                              child: Column(
+//                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                                  children: <Widget>[
+//                                    DropDownField(
+//                                      onValueChanged: (dynamic value) {
+//                                        TileSize_id = value;
+//                                      },
+//                                      icon: FaIcon(FontAwesomeIcons.robot),
+//                                      value: TileSize_id,
+//                                      required: false,
+//                                      hintText: 'Tile Size',
+//                                      labelText: 'Requirment Size',
+//                                      items: TileSize,
+//                                    ),
+//                                  ]
+//                              ),
+//                            ),
                             Container(
                               padding: EdgeInsets.all(5.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    DropDownField(
-                                      onValueChanged: (dynamic value) {
-                                        TileSize_id = value;
-                                      },
-                                      icon: FaIcon(FontAwesomeIcons.robot),
-                                      value: TileSize_id,
-                                      required: false,
-                                      hintText: 'Tile Size',
-                                      labelText: 'Requirment Size',
-                                      items: TileSize,
-                                    ),
-                                  ]
+                              child: new TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                style: TextStyle( color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black12,
+                                  filled: true,
+                                  icon: FaIcon(FontAwesomeIcons.robot),
+                                  hintText: 'Tiles Size',
+                                  contentPadding:
+                                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
                               ),
                             ),
+
                             Container(
                               padding: EdgeInsets.all(5.0),
                               child: new TextField(
@@ -316,95 +565,112 @@ class _TextFieldscreenState extends State<NavAddCoustomer> {
                             ),
                             Container(
                               padding: EdgeInsets.all(5.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    DropDownField(
-                                      onValueChanged: (dynamic value) {
-                                        Payment_Type = value;
-                                      },
-                                      icon: FaIcon(FontAwesomeIcons.robot),
-                                      value: Payment_Type,
-                                      required: false,
-                                      hintText: 'Type',
-                                      labelText: 'Payment ',
-                                      items: PaymentType,
-                                    ),
-                                  ]),
+                              child: new TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                style: TextStyle( color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black12,
+                                  filled: true,
+                                  icon: FaIcon(FontAwesomeIcons.robot),
+                                  hintText: 'Payment Type',
+                                  contentPadding:
+                                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+//                            Container(
+//                              padding: EdgeInsets.all(5.0),
+//                              child: Column(
+//                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+//                                  children: <Widget>[
+//                                    DropDownField(
+//                                      onValueChanged: (dynamic value) {
+//                                        Payment_Type = value;
+//                                      },
+//                                      icon: FaIcon(FontAwesomeIcons.robot),
+//                                      value: Payment_Type,
+//                                      required: false,
+//                                      hintText: 'Type',
+//                                      labelText: 'Payment ',
+//                                      items: PaymentType,
+//                                    ),
+//                                  ]),
+//                            ),
+                            Container(
+                              padding: EdgeInsets.all(5.0),
+                              child: new TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                style: TextStyle( color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black12,
+                                  filled: true,
+                                  icon: FaIcon(FontAwesomeIcons.robot),
+                                  hintText: 'Dealing With',
+                                  contentPadding:
+                                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ),
                             Container(
                               padding: EdgeInsets.all(5.0),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Container(
-                                      padding: EdgeInsets.all(5.0),
-                                      child: new TextField(
-                                        keyboardType: TextInputType.number,
-                                        autofocus: false,
-                                        style: TextStyle( color: Colors.black),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.black12,
-                                          filled: true,
-                                          icon: FaIcon(FontAwesomeIcons.robot),
-                                          hintText: 'dealing_with',
-                                          contentPadding:
-                                          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white),
-                                          ),
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(5.0),
-                                      child: new TextField(
-                                        keyboardType: TextInputType.number,
-                                        autofocus: false,
-                                        style: TextStyle( color: Colors.black),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.black12,
-                                          filled: true,
-                                          icon: FaIcon(FontAwesomeIcons.robot),
-                                          hintText: 'dealing_firm',
-                                          contentPadding:
-                                          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white),
-                                          ),
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(color: Colors.white),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: new TextField(
-                                      keyboardType: TextInputType.number,
-                                      autofocus: false,
-                                      style: TextStyle( color: Colors.black),
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.black12,
-                                        filled: true,
-                                        icon: FaIcon(FontAwesomeIcons.robot),
-                                        hintText: 'dealing_since',
-                                        contentPadding:
-                                        const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white),
-                                        ),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
+                              child: new TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                style: TextStyle( color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black12,
+                                  filled: true,
+                                  icon: FaIcon(FontAwesomeIcons.robot),
+                                  hintText: 'Dealing Firm',
+                                  contentPadding:
+                                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
                                   ),
-                                  ]),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ),
+                            Container(
+                              padding: EdgeInsets.all(5.0),
+                              child: new TextField(
+                                keyboardType: TextInputType.number,
+                                autofocus: false,
+                                style: TextStyle( color: Colors.black),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.black12,
+                                  filled: true,
+                                  icon: FaIcon(FontAwesomeIcons.robot),
+                                  hintText: 'Dealing Since',
+                                  contentPadding:
+                                  const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+
                             SizedBox(height: 10),
                           ],
                         ),
