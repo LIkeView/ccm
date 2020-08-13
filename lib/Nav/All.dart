@@ -96,7 +96,7 @@ class _AllTypeState extends State<AllType> {
                               children: <Widget>[
                                 Container(
                                   child: new CircleAvatar(
-//                                    child: Text(data[index]["firm_name"][0].toString().toUpperCase(),style: TextStyle(color: Colors.white),),
+                                    child: Text(data[index]["firm_name"][0].toString().toUpperCase(),style: TextStyle(color: Colors.white),),
                                     backgroundImage: new NetworkImage(url),
                                     backgroundColor: Colors.black45,
                                     radius: 24.0,
